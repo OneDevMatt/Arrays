@@ -45,9 +45,10 @@ namespace Arrays
                     Console.WriteLine("Wrong Input Entered!");
                     Console.WriteLine("Enter Valid Input");
                 }
-                storedArray = Display4DMatrixGen(fdMatrix);
+                MatrixDeterminant(fdMatrix);
 
-              
+
+
             }
             catch (Exception e)
             {
@@ -74,7 +75,7 @@ namespace Arrays
             return array;
         }
 
-        public static int[,,,] Display4DMatrixGen(int[,,,] array)//Generates a 4 Dimensional Matrix of dimensions [1,1,4,4], with it's elements randomly generated.
+        public static void Display4DMatrixGen(int[,,,] array)//Generates a 4 Dimensional Matrix of dimensions [1,1,4,4], with it's elements randomly generated.
         {
             RandomElementGen(fdMatrix);
             for (var i = 0; i < array.GetLength(0); i++)
@@ -96,7 +97,7 @@ namespace Arrays
                 }
                 Console.WriteLine("]\n");
             }
-            return fdMatrix;
+            
         }
 
         public static void Matrix2DGen()//Generates a 2 Dimensional Square Matrix
@@ -134,8 +135,38 @@ namespace Arrays
             }
         }
 
-       
+        private static void MatrixSquared(int[,,,] array)
+        {
+            for (var i = 0; i < array.GetLength(0); i++)
+            {
+                for (var j = 0; j < array.GetLength(1); j++)
+                {
+                    for (var k = 0; k < array.GetLength(2); k++)
+                    {
+                        for (var l = 0; l < array.GetLength(3); l++)
+                        {
+                            var entry = fdMatrix[i, j, k, l];
+                            var squaredEntry = (int)Math.Pow(entry, 2);
+                            fdMatrix[i, j, k, l] = squaredEntry;
+                        }
+                    }
+                }
+            }
         }
+
+        private static void MatrixDeterminant(int[,,,] array)
+        {
+            var determinant = 0;
+            for (var i = 0; i < columns; i++)
+                {
+                    determinant += fdMatrix[0,0,0,i] * (fdMatrix[1, 0, 0,(i + 1) % columns] * fdMatrix[2,0,0, (i + 2) % columns] -
+                                                     fdMatrix[1,0,0,(i + 2) % columns] * fdMatrix[2,0,0, (i + 1) % columns]);
+                }
+            
+            Console.WriteLine($"The determinant of the 3x3 matrix is {determinant}.");
+        }
+
+
 
 
 
@@ -175,7 +206,7 @@ namespace Arrays
                 Console.WriteLine(" }");
 
             }
-            
+
 
         }*/
 
